@@ -6,3 +6,4 @@ def python():
 	print(int(a)*b)
 	return
 python()
+python()
