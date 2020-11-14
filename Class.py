@@ -1,5 +1,4 @@
 import abc
-
 class Property:
     def __init__(self, name, location, price, loanMonths):
         self.name = name
@@ -60,4 +59,3 @@ class Lease(Property):
 
     def getQuota(self):
         pass
-    
