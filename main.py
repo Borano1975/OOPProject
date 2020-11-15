@@ -1,23 +1,23 @@
 import Classes
 import os.path
 import re
+import operator
 
 filename = "houses"
-file = None #string saving lines
-all_lines = [] #list of saved lines
-lines_read = 0 #number of lines saved(1 less because starts from 0)
-myAirBNB = {} #list of AirBNB houses objects to be created.
-myLease = {} #list of leasing houses objects to be created.
+file = None  # string saving lines
+all_lines = []  # list of saved lines
+lines_read = 0  # number of lines saved(1 less because starts from 0)
+myAirBNB = {}  # list of AirBNB houses objects to be created.
+myLease = {}  # list of leasing houses objects to be created.
 leaseHouseNumber = 0
 airBNBHouseNumber = 0
 if os.path.isfile(filename + ".txt"):
     with open(filename + '.txt') as file:
         for line in file:
-            #Assigning each line to all_lines and
-            #stripping the file from '\n' chars at the end of each line.
+            # Assigning each line to all_lines and
+            # stripping the file from '\n' chars at the end of each line.
             all_lines.append(line[:-1])
             lines_read += 1
-
 
 """
 The following code is going to:
@@ -41,7 +41,7 @@ for n in range(len(all_lines)):
     house = pattern.search(all_lines[n])
     if house:
         if house[5].strip() == '0':
-            #create lease object with house strips
+            # create lease object with house strips
             myLease[leaseHouseNumber] = Classes.Lease(house[1].strip(),
                                                       house[2].strip(),
                                                       float(house[3].strip()),
@@ -49,7 +49,7 @@ for n in range(len(all_lines)):
                                                       float(house[5].strip()))
             leaseHouseNumber += 1
         else:
-            #create airbnb objects with house strips.
+            # create airbnb objects with house strips.
             myAirBNB[airBNBHouseNumber] = Classes.AirBNB(house[1].strip(),
                                                          house[2].strip(),
                                                          float(house[3].strip()),
@@ -61,18 +61,34 @@ for n in range(len(all_lines)):
     else:
         print("You encountered some mistake in separation of each line.")
 
-#NOW WE HAVE TO CALCULATE THE MONTHLY EARNING OF EACH HOUSE, whether that is leasing or airbnb.
-#and also the total earning from each house.
-#We could've done this from the above loop as well, just did not want it to be cluttered.
-totalEarning = 0
+# NOW WE HAVE TO CALCULATE THE MONTHLY EARNING OF EACH HOUSE, whether that is leasing or airbnb.
+# and also the total earning from each house.
+# We could've done this from the above loop as well, just did not want it to be cluttered.
+earnings = {}
 for n in range(len(myLease)):
-    #print("Monthly Earnings of house: \" {} \" are : {} ". format(myLease[n].getName(), myLease[n].getQuota()))
-    totalEarning += myLease[n].getQuota()
-for n in range(len(myAirBNB)):
-    #print("Monthly Earnings of house: \" {} \" are : {} ".format(myAirBNB[n].getName(), myAirBNB[n].getQuota()))
-    totalEarning += myAirBNB[n].getQuota()
+    # print("Monthly Earnings of house: \" {} \" are : {} ". format(myLease[n].getName(), myLease[n].getQuota()))
+    earnings[n] = myLease[n].getQuota()
+for i in range(len(myAirBNB)):
+    # print("Monthly Earnings of house: \" {} \" are : {} ".format(myAirBNB[n].getName(), myAirBNB[n].getQuota()))
+    earnings[len(myLease) + i] = myAirBNB[i].getQuota()
 
+def findTotalEarnings(earning_list):
+    total = 0
+    for x in earning_list:
+        total += earning_list[x]
+    return int(total)
 
-print("Total Monthly Earnings are: " + str(totalEarning))
+#Since sort does not work on dictionaries, neither do operands like more or less;
+#I have created a method which receives the dictionary,(key: value) in our case;
+#That sorts a list of tuples from the second value of earnings dict:
+def findHighestEarning(earning_list):
+    sorted_earnings = sorted(earnings.items(), key=operator.itemgetter(1))
+    return sorted_earnings[len(sorted_earnings)-1]
 
-#sort algorithm here:
+def findLowestEarning(earning_list):
+    sorted_earnings = sorted(earnings.items(), key=operator.itemgetter(1))
+    return sorted_earnings[0]
+
+print(findTotalEarnings(earnings))
+print(findHighestEarning(earnings))
+print(findLowestEarning(earnings))

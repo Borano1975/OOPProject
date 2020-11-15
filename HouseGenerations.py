@@ -1,5 +1,5 @@
 import random
-number_of_houses = 9
+number_of_houses = 31
 for n in range(number_of_houses):
     monthlyCare = random.randint(0, 1200)
     if monthlyCare < 500:
