@@ -2,6 +2,18 @@ import Classes
 import os.path
 import re
 import operator
+import random
+
+def houseGeneration(num):
+    monthlyCare = random.randint(0, 1200)
+    if monthlyCare < 500:
+        monthlyCare = 0
+    return ("House {}, Street {}, {}, {}, {}\n".format(num + 1,
+                                                       num + 1,
+                                                       random.randint(40000, 90000),
+                                                       random.randint(24, 96),
+                                                       monthlyCare))
+
 
 filename = "houses"
 file = None  # string saving lines
@@ -9,8 +21,14 @@ all_lines = []  # list of saved lines
 lines_read = 0  # number of lines saved(1 less because starts from 0)
 myAirBNB = {}  # list of AirBNB houses objects to be created.
 myLease = {}  # list of leasing houses objects to be created.
+houseNumber = 25
 leaseHouseNumber = 0
 airBNBHouseNumber = 0
+f = open(filename + ".txt", "w")
+for i in range(houseNumber):
+    f.write(houseGeneration(i))
+f.close()
+
 if os.path.isfile(filename + ".txt"):
     with open(filename + '.txt') as file:
         for line in file:
@@ -18,7 +36,6 @@ if os.path.isfile(filename + ".txt"):
             # stripping the file from '\n' chars at the end of each line.
             all_lines.append(line[:-1])
             lines_read += 1
-
 """
 The following code is going to:
 Check each element where the generated object string is stored(lines of text)
@@ -61,6 +78,8 @@ for n in range(len(all_lines)):
     else:
         print("You encountered some mistake in separation of each line.")
 
+file.close()
+
 # NOW WE HAVE TO CALCULATE THE MONTHLY EARNING OF EACH HOUSE, whether that is leasing or airbnb.
 # and also the total earning from each house.
 # We could've done this from the above loop as well, just did not want it to be cluttered.
@@ -72,23 +91,26 @@ for i in range(len(myAirBNB)):
     # print("Monthly Earnings of house: \" {} \" are : {} ".format(myAirBNB[n].getName(), myAirBNB[n].getQuota()))
     earnings[len(myLease) + i] = myAirBNB[i].getQuota()
 
+
 def findTotalEarnings(earning_list):
     total = 0
     for x in earning_list:
         total += earning_list[x]
     return int(total)
 
-#Since sort does not work on dictionaries, neither do operands like more or less;
-#I have created a method which receives the dictionary,(key: value) in our case;
-#That sorts a list of tuples from the second value of earnings dict:
-def findHighestEarning(earning_list):
-    sorted_earnings = sorted(earnings.items(), key=operator.itemgetter(1))
-    return sorted_earnings[len(sorted_earnings)-1]
 
-def findLowestEarning(earning_list):
-    sorted_earnings = sorted(earnings.items(), key=operator.itemgetter(1))
-    return sorted_earnings[0]
+# Since sort does not work on dictionaries, neither do operands like more or less;
+# I have created a method which receives the dictionary,(key: value) in our case;
+# That sorts a list of tuples from the second value of earnings dict:
+def findHighestEarning(earnings_list):
+    sorted_earnings = sorted(earnings_list.items(), key=operator.itemgetter(1))
+    return int(sorted_earnings[len(sorted_earnings) - 1][1])
 
-print(findTotalEarnings(earnings))
-print(findHighestEarning(earnings))
-print(findLowestEarning(earnings))
+def findLowestEarning(earnings_list):
+    sorted_earnings = sorted(earnings_list.items(), key=operator.itemgetter(1))
+    return int(sorted_earnings[0][1])
+
+
+print("Total earnings: {}".format(findTotalEarnings(earnings)))
+print("Highest earning house: {}".format(findHighestEarning(earnings)))
+print("Lowest earning house: {}".format(findLowestEarning(earnings)))
