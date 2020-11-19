@@ -1,0 +1,64 @@
+OOP Project - Python Programming.
+
+Program Description:
+My program will generate and read a txt file in which instances of owned properties are declared.
+Each line in this file will denote either a Leasing House or AirBNB.
+Each line will contain this information separated by commas ',': House Name, Location, Price, Loan Months and Monthly Care.
+My program will determine whether the house is a Loan house or an AirBNB house.
+Then, it will add each house in a dictionary where after it will order it by monthly income it brings.
+By doing so, we can determine the which is the lowest income of them all, which is the highest and also the total income.
+
+
+Code Description:
+Regarding Classes.py:
+-A parent class named Properties is created to store values: Name, Location, Price and Loan Months.
+Each of these properties of class have their respective getters and setters.
+A property "getMortgage" will be initialized by the creation of any class object. (Price/LoanMonths)
+An abstract mehtod getQuota is created to later be overridden by inherited classes.
+
+-Two Classes inheriting from Properties class are declared: Loan and AirBNB
+The basic difference between them both is going to be MonthlyCare property.
+On a Loan house, you do not have to maintain a monthly care(hence its = 0), different from an AirBNB property.
+A Loan House quota(monthly income) is calculated differently from an AirBNB house. (Both override the abstract method.)
+
+Regarding main.py:
+The program will make use of some pre defined objects:
+A string for the name of text file.
+A list to use for each line inside the text file.
+A couple of dictionaries to append each object taken from the file.
+Some integers for newline, list and dictionaries element counters.
+
+A file is created then written on it by the function houseGeneration
+I have defined this function which purpose is to generate each house instance.
+houseGeneration will take a number, which will be used as the name of the house and location: House n, Location n
+I have used the random python library to determine the numbers of each house.
+
+After that we open the file again but this time instead of write we read from file.
+I have used a for loop to append each line on the file into a list named "all_lines"
+
+We create a pattern recognition (regex) formula which will: - separate each line by its commas
+                                                            - create objects based on the information in file
+                                                            - append these objects to our pre-created dictionaries.
+I have created 4 methods:
+-"getEarnings": which will execute the getQuota method on each property instance and assert it in a dictionary.
+-"findTotalEarnings": which will get the dictionary created with each house quota and add them to return the total income
+-"findHighestEarnings": which will sort the TotalEarnings and show the Highest income from the houses.
+-"findLowestEarnings": which will sort the TotalEarnings and show the Lowest income from the houses.
+I wanted to add a sort function as well, but I figured since it is only one line and we will be using it only twice,
+it would add some unnecessary complexity to our program. But we can do that if we later decide to upscale.
+
+Regarding test_Classes.py and test_main.py:
+In both these files there are saved tests for methods in Classes.py and functions in main.py.
+
+Tested methods/funcs:
+    -From Classes.py:
+        getMortgage() in all three: Property, Lease and AirBNB classes.
+        getQuota() in both Lease and AirBNB classes.
+        Three tests ran OK.
+    -From main.py:
+        houseGeneration()
+        getEarnings()
+        findTotalEarnings()
+        findHighestEarnings()
+        findLowestEarnings()
+        Five tests ran OK.
