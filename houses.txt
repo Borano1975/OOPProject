@@ -1,6 +1,0 @@
-House 1, Street 1, 84435, 35, 833
-House 2, Street 2, 78576, 56, 871
-House 3, Street 3, 47743, 64, 0
-House 4, Street 4, 62907, 52, 0
-House 5, Street 5, 80995, 69, 974
-House 6, Street 6, 68030, 81, 770
