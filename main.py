@@ -106,6 +106,8 @@ def findTotalEarnings(earning_list):
 # Since sort does not work on dictionaries, neither do operands like more or less;
 # I have created a method which receives the dictionary,(key: value) in our case;
 # That sorts a list of tuples from the second value of earnings dict:
+print(earnings)
+
 def findHighestEarning(earnings_list):
     sorted_earnings = sorted(earnings_list.items(), key=operator.itemgetter(1))
     return int(sorted_earnings[len(sorted_earnings) - 1][1])
