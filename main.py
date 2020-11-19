@@ -21,7 +21,7 @@ all_lines = []  # list of saved lines
 lines_read = 0  # number of lines saved(1 less because starts from 0)
 myAirBNB = {}  # list of AirBNB houses objects to be created.
 myLease = {}  # list of leasing houses objects to be created.
-houseNumber = 25
+houseNumber = 6
 leaseHouseNumber = 0
 airBNBHouseNumber = 0
 f = open(filename + ".txt", "w")
@@ -79,18 +79,22 @@ for n in range(len(all_lines)):
         print("You encountered some mistake in separation of each line.")
 
 file.close()
-
 # NOW WE HAVE TO CALCULATE THE MONTHLY EARNING OF EACH HOUSE, whether that is leasing or airbnb.
 # and also the total earning from each house.
 # We could've done this from the above loop as well, just did not want it to be cluttered.
-earnings = {}
-for n in range(len(myLease)):
-    # print("Monthly Earnings of house: \" {} \" are : {} ". format(myLease[n].getName(), myLease[n].getQuota()))
-    earnings[n] = myLease[n].getQuota()
-for i in range(len(myAirBNB)):
-    # print("Monthly Earnings of house: \" {} \" are : {} ".format(myAirBNB[n].getName(), myAirBNB[n].getQuota()))
-    earnings[len(myLease) + i] = myAirBNB[i].getQuota()
 
+def getEarnings(myLeaseC, myAirBNBC):
+    earnings = {}
+    for n in range(len(myLeaseC)):
+        # print("Monthly Earnings of house: \" {} \" are : {} ". format(myLease[n].getName(), myLease[n].getQuota()))
+        earnings[n] = myLeaseC[n].getQuota()
+    for i in range(len(myAirBNBC)):
+        # print("Monthly Earnings of house: \" {} \" are : {} ".format(myAirBNB[n].getName(), myAirBNB[n].getQuota()))
+        earnings[len(myLeaseC) + i] = myAirBNBC[i].getQuota()
+    return earnings
+
+earnings = getEarnings(myLease, myAirBNB)
+print(earnings)
 
 def findTotalEarnings(earning_list):
     total = 0

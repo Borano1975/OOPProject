@@ -15,7 +15,7 @@ class TestProperty(unittest.TestCase):
         self.assertEqual(self.property_2.getMortgage(), 56697/37)
         self.assertEqual(self.property_2.getMortgage(), self.property_2.price / self.property_2.loanMonths)
 
-class TestLease(unittest.TestCase):
+class TestLeaseAirBNB(unittest.TestCase):
     def setUp(self):
         self.lease_1 = Lease("House 1", "Street 1", 59023, 33, 0)
         self.lease_2 = Lease("House 2", "Street 2", 75114, 27, 0)

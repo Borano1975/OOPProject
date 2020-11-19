@@ -1,5 +1,5 @@
 import abc
-class Property:
+class Property(object):
     def __init__(self, name, location, price, loanMonths):
         self.name = name
         self.location = location
@@ -32,10 +32,10 @@ class Property:
         return self.loanMonths
 
     def setMortgage(self):
-        self.mortgage = self.price / self.mortgage
+        self.mortgage = self.price / self.loanMonths
 
     def getMortgage(self):
-        return self.price / self.mortgage
+        return self.price / self.loanMonths
 
     @abc.abstractmethod
     def getQuota(self):
@@ -43,7 +43,7 @@ class Property:
 
 class Lease(Property):
     def __init__(self, name, location, price, loanMonths, monthlyCare):
-        super().__init__(name, location, price, loanMonths)
+        super(Lease, self).__init__(name, location, price, loanMonths)
         self.monthlyCare = monthlyCare
 
     def getQuota(self):
@@ -51,7 +51,7 @@ class Lease(Property):
 
 class AirBNB(Property):
     def __init__(self, name, location, price, loanMonths, monthlyCare):
-        super().__init__(name, location, price, loanMonths)
+        super(AirBNB, self).__init__(name, location, price, loanMonths)
         self.monthlyCare = monthlyCare
 
     def getMonthlyCare(self):
