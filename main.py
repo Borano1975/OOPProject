@@ -3,6 +3,7 @@ import os.path
 import re
 import operator
 import random
+import optparse
 
 def houseGeneration(num):
     monthlyCare = random.randint(0, 1200)
@@ -13,9 +14,14 @@ def houseGeneration(num):
                                                        random.randint(40000, 90000),
                                                        random.randint(24, 96),
                                                        monthlyCare))
+parser = optparse.OptionParser('f <Filename>')
+parser.add_option('-f', '--file', dest='filename', type='string')
+(options, args) = parser.parse_args()
+if options.filename:
+    filename = options.filename
+else:
+    filename = "generated"
 
-
-filename = "houses"
 file = None  # string saving lines
 all_lines = []  # list of saved lines
 lines_read = 0  # number of lines saved(1 less because starts from 0)
@@ -24,10 +30,12 @@ myLease = {}  # list of leasing houses objects to be created.
 houseNumber = 32
 leaseHouseNumber = 0
 airBNBHouseNumber = 0
-f = open(filename + ".txt", "w")
-for i in range(houseNumber):
-    f.write(houseGeneration(i))
-f.close()
+
+if filename == 'generated':
+    f = open(filename + ".txt", "w")
+    for i in range(houseNumber):
+        f.write(houseGeneration(i))
+    f.close()
 
 if os.path.isfile(filename + ".txt"):
     with open(filename + '.txt') as file:
