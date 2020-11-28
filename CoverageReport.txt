@@ -1,0 +1,13 @@
+Regarding test_Classes.py and test_main.py:
+In both these files there are saved tests for methods in Classes.py and functions in main.py.
+
+Tested methods/funcs:
+    -From Classes.py:
+        getMortgage() in all three: Property, Lease and AirBNB classes.
+        getQuota() in both Lease and AirBNB classes.
+    -From main.py:
+        houseGeneration()
+        getEarnings()
+        findTotalEarnings()
+        findHighestEarnings()
+        findLowestEarnings()

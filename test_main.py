@@ -38,7 +38,7 @@ class Test(unittest.TestCase):
         self.assertEqual(main.findHighestEarning(self.total_earnings), int(self.house4_getquota))
 
     def test_find_lowest_earning(self):
-        self.assertEqual(main.findLowestEarning(self.total_earnings), int(self.house1_getquota))
+        self.assertEqual(main.findLowestEarning(self.total_earnings), int(self.house2_getquota))
 
 
 if __name__ == '__main__': #I have used this for ease of execution.

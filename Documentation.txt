@@ -46,19 +46,3 @@ I have created 4 methods:
 -"findLowestEarnings": which will sort the TotalEarnings and show the Lowest income from the houses.
 I wanted to add a sort function as well, but I figured since it is only one line and we will be using it only twice,
 it would add some unnecessary complexity to our program. But we can do that if we later decide to upscale.
-
-Regarding test_Classes.py and test_main.py:
-In both these files there are saved tests for methods in Classes.py and functions in main.py.
-
-Tested methods/funcs:
-    -From Classes.py:
-        getMortgage() in all three: Property, Lease and AirBNB classes.
-        getQuota() in both Lease and AirBNB classes.
-        Three tests ran OK.
-    -From main.py:
-        houseGeneration()
-        getEarnings()
-        findTotalEarnings()
-        findHighestEarnings()
-        findLowestEarnings()
-        Five tests ran OK.

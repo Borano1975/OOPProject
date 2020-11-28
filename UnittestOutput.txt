@@ -1,0 +1,19 @@
+test_main.py output:
+Boranos-MacBook-Air:OOPProject borano$ python3 test_main.py
+Total earnings: 80880
+Highest earning house: 4414
+Lowest earning house: 508
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+
+
+test_Classes.py output:
+Boranos-MacBook-Air:OOPProject borano$ python3 test_Classes.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
